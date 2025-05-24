@@ -1,0 +1,64 @@
+# replace all project words to your project name
+services:
+  php:
+    build:
+      context: ..
+      dockerfile: docker/php/Dockerfile
+    volumes:
+      - ../:/var/www/symfony
+    environment:
+      - APP_ENV=dev
+    networks:
+      - project_network
+    container_name: ${PROJECT_NAME}-php
+
+  apache:
+    build:
+      context: .
+      dockerfile: ./apache/Dockerfile
+    container_name: ${PROJECT_NAME}-apache
+    ports:
+      - "80:80"
+    volumes:
+      - ../:/var/www/symfony
+      - ./apache/vhost.conf:/etc/apache2/sites-enabled/000-default.conf
+    depends_on:
+      - php
+    networks:
+      - project_network
+    working_dir: /var/www/symfony
+    environment:
+      - APACHE_DOCUMENT_ROOT=/var/www/symfony/public
+    command: >
+      bash -c "docker-php-ext-install pdo pdo_mysql &&
+               a2enmod rewrite &&
+               apache2-foreground"
+
+  db:
+    image: mysql:8.0
+    container_name: ${PROJECT_NAME}-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: ${PROJECT_NAME}
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - project_network
+
+  adminer:
+    image: adminer
+    container_name: ${PROJECT_NAME}-adminer
+    environment:
+      - HOST=adminer.${PROJECT_NAME}.local
+    depends_on:
+      - db
+    networks:
+      - project_network
+
+networks:
+  project_network:
+    name: ${PROJECT_NAME}_network
+
+volumes:
+  db_data:
+    name: ${PROJECT_NAME}_db_data
