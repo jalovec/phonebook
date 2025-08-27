@@ -26,4 +26,40 @@ class TestController extends AbstractController
             ]
         );
     }
+
+    #[Route(path: '/hello', name: 'hello_route')]
+    public function hello(): Response
+    {
+        $hello = $this->testService->getGreating('Hello');
+
+        return $this->render(
+            'test/hello.html.twig', [
+                'hello' => $hello
+            ]
+        );
+    }
+
+    #[Route(path: '/bye', name: 'bye_route')]
+    public function bye(): Response
+    {
+        $bye = $this->testService->getGreating('Bye');
+
+        return $this->render(
+            'test/bye.html.twig', [
+                'bye' => $bye
+            ]
+        );
+    }
+
+    #[Route(path: '/count', name: 'count_route')]
+    public function count(): Response
+    {
+        $bye = $this->testService->add(2, 3);
+
+        return $this->render(
+            'test/bye.html.twig', [
+                'bye' => $bye
+            ]
+        );
+    }
 }
