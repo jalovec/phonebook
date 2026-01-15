@@ -2,14 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Service;
+namespace App\Domain\Contact\Service;
 
 use App\Domain\Contact\Dto\ContactCompleteDto;
 use App\Domain\Contact\Dto\ContactCreateDto;
 use App\Domain\Contact\Exception\ContactException;
 use App\Domain\Contact\Repository\ContactRepository;
 use App\Entity\Contact;
-use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class ContactService
 {

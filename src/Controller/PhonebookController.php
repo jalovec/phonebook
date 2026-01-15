@@ -7,7 +7,7 @@ use App\Domain\Contact\Dto\ContactCreateDto;
 use App\Domain\Contact\Exception\ContactException;
 use App\Domain\Contact\Form\ContactCreateTypeForm;
 use App\Domain\Contact\Form\ContactUpdateTypeForm;
-use App\Domain\Service\ContactService;
+use App\Domain\Contact\Service\ContactService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
