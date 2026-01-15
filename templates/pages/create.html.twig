@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    <title>{{ 'PAGE_TITLE.CREATE_UPDATE'|trans }}</title>
+{% endblock %}
+
+{% block css %}
+{{ parent() }}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block javascript %}
+{{  parent() }}
+<script src="{{ asset('javascript/avatar.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+
+{{ form_start(createForm) }}
+    <div class="mb-3">
+        {% for label, messages in app.flashes %}
+            {% set bootstrapLabel = label == 'error' ? 'danger' : label %}
+            {% for message in messages %}
+                <div class="alert alert-{{ bootstrapLabel }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endfor %}
+        <label class="form-label">{{ form_label(createForm.avatar) }}</label>
+        <div class="d-flex gap-3">
+            {% for child in createForm.avatar %}
+                <div class="text-center">
+                    {{ form_widget(child, {'attr': {'class': 'd-none', 'id': child.vars.id}}) }}
+                    <label for="{{ child.vars.id }}" class="avatar-label" style="cursor: pointer;">
+                        <img src="{{ asset('/images/avatars/' ~ child.vars.value) }}"
+                             alt="{{ child.vars.label|trans }}"
+                             class="img-thumbnail"
+                             style="width: 80px;">
+                    </label>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+    <div class="mb-3">
+        <label for="firstName" class="form-label">
+            {{ form_label(createForm.firstName) }}
+        </label>
+        {{ form_widget(createForm.firstName, {'attr': {'class': 'form-control', 'id': 'firstName', 'required': 'required'}}) }}
+    </div>
+
+    <div class="mb-3">
+        <label for="lastName" class="form-label">
+            {{ form_label(createForm.lastName) }}
+        </label>
+        {{ form_widget(createForm.lastName, {'attr': {'class': 'form-control', 'id': 'lastName', 'required': 'required'}}) }}
+    </div>
+
+    <div class="mb-3">
+        <label for="lastName" class="form-label">
+            {{ form_label(createForm.position) }}
+        </label>
+        {{ form_widget(createForm.position, {'attr': {'class': 'form-control', 'id': 'lastName'}}) }}
+    </div>
+
+    <div class="mb-3">
+        <label for="email" class="form-label">
+            {{ form_label(createForm.address) }}
+        </label>
+        {{ form_widget(createForm.address, {'attr': {'class': 'form-control', 'id': 'email'}}) }}
+    </div>
+
+    <div class="mb-3">
+        <label for="email" class="form-label">
+            {{ form_label(createForm.email) }}
+        </label>
+        {{ form_widget(createForm.email, {'attr': {'class': 'form-control', 'id': 'email', 'required': 'required'}}) }}
+    </div>
+
+    <div class="mb-3">
+        {{ form_label(createForm.phoneNumber, 'Telefon', {'label_attr': {'class': 'form-label'}}) }}
+        {{ form_widget(createForm.phoneNumber, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    <div class="mb-3">
+        {{ form_label(createForm.phoneNumberType, 'Typ čísla', {'label_attr': {'class': 'form-label'}}) }}
+        {{ form_widget(createForm.phoneNumberType, {'attr': {'class': 'form-select'}}) }}
+    </div>
+
+    {{ form_widget(createForm.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+{{ form_end(createForm) }}
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

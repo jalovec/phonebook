@@ -1,0 +1,31 @@
+<div class="row g-0 align-items-center pb-4">
+    <div class="col-sm-6">
+        {% set firstItem = (currentPage - 1) * limit + 1 %}
+        {% set lastItem = (limit * currentPage) > contactsCount ? contactsCount : (limit * currentPage) %}
+        {% set actualPage = ((currentPage - 1) * limit + 1) %}
+        <div><p class="mb-sm-0">{{ 'SHOWING_CONTACTS'|trans({
+                    '%firstItem%': firstItem,
+                    '%lastItem%': lastItem,
+                    '%contactsCount%': contactsCount
+                }) }}</p></div>
+    </div>
+    <div class="col-sm-6">
+        <div class="float-sm-end">
+            <ul class="pagination mb-sm-0">
+                {% if currentPage > 1 %}
+                <li class="page-item">
+                    <a href="?page={{ currentPage - 1 }}" class="page-link"><i class="mdi mdi-chevron-left"></i></a>
+                </li>
+                {% endif %}
+                {% for i in 1..totalPages %}
+                <li class="page-item{% if i == currentPage %} active{% endif %}"><a href="?page={{ i }}" class="page-link">{{ i }}</a></li>
+                {% endfor %}
+                {% if currentPage < totalPages %}
+                <li class="page-item">
+                    <a href="?page={{ currentPage + 1 }}" class="page-link"><i class="mdi mdi-chevron-right"></i></a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</div>

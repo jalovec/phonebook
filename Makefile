@@ -23,29 +23,29 @@ down:
 	@cd ${DOCKER_DIR} && docker compose down
 
 in:
-	@cd ${DOCKER_DIR} && docker exec -it project-php bash
+	@cd ${DOCKER_DIR} && docker exec -it phonebook-php bash
 
 cc:
-	@cd ${DOCKER_DIR} && docker exec -it project-php php bin/console c:c
+	@cd ${DOCKER_DIR} && docker exec -it phonebook-php php bin/console c:c
 
 asset:
-	@cd ${DOCKER_DIR} && docker exec -it project-php php bin/console asset-map:compile
+	@cd ${DOCKER_DIR} && docker exec -it phonebook-php php bin/console asset-map:compile
 
 migrate:
-	@cd ${DOCKER_DIR} && docker exec -it project-php php bin/console d:m:m
+	@cd ${DOCKER_DIR} && docker exec -it phonebook-php php bin/console d:m:m
 
 pull:
 	@echo 'Pulling from Github ...';
 	@git pull $(REPO_URL)
 
 phpcs:
-	@cd ${DOCKER_DIR} && docker exec -it project-php vendor/bin/phpcs src/
+	@cd ${DOCKER_DIR} && docker exec -it phonebook-php vendor/bin/phpcs src/
 
 phpcs-fix:
-	@cd ${DOCKER_DIR} && docker exec -it project-php vendor/bin/phpcbf src/
+	@cd ${DOCKER_DIR} && docker exec -it phonebook-php vendor/bin/phpcbf src/
 
 php-stan:
-	@cd ${DOCKER_DIR} && docker exec -it project-php vendor/bin/phpstan analyse src/ --level=${PHP_STAN_LEVEL}
+	@cd ${DOCKER_DIR} && docker exec -it phonebook-php vendor/bin/phpstan analyse src/ --level=${PHP_STAN_LEVEL}
 
 messenger:
-	@cd ${DOCKER_DIR} && docker exec -it project-php php bin/console messenger:consume async -vv
+	@cd ${DOCKER_DIR} && docker exec -it phonebook-php php bin/console messenger:consume async -vv

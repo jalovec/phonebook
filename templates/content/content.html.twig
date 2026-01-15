@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{%  block title %}
+    <title>{{ 'PAGE_TITLE.MAIN'|trans }}</title>
+{% endblock %}
+
+{% block css %}
+    {{ parent() }}
+    <link href="{{ asset('styles/content/content.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block javascript %}
+    {{  parent() }}
+    <script src="{{ asset('javascript/delete.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    {% for label, messages in app.flashes %}
+        {% set bootstrapLabel = label == 'error' ? 'danger' : label %}
+        {% for message in messages %}
+            <div class="alert alert-{{ bootstrapLabel }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for contact in contacts %}
+        <div class="col-xl-3 col-sm-6 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="dropdown float-end">
+                        <a class="text-muted dropdown-toggle font-size-16" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true"><i class="bx bx-dots-horizontal-rounded"></i></a>
+                        <div class="dropdown-menu dropdown-menu-end">
+                            <a class="dropdown-item" href="{{ path('update_route', {'id': contact.id}) }}">{{ 'EDIT'|trans }}</a>
+                            <a class="dropdown-item delete-btn" href="{{ path('delete_route', {'id': contact.id}) }}">{{ 'DELETE'|trans }}</a>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <div><img src="{{ asset(contact.avatar.path()) }}" alt="{{ contact.firstName }} {{ contact.lastName }}" class="avatar-md rounded-circle img-thumbnail" /></div>
+                        <div class="flex-1 ms-3">
+                            <h5 class="font-size-16 mb-1"><a href="#" class="text-dark">{{ contact.firstName }} {{ contact.lastName }}</a></h5>
+                            {% if contact.position is not null %}
+                                <span class="badge badge-soft-success mb-0">{{ contact.position }}</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="mt-3 pt-1">
+                        <p class="text-muted mb-0"><i class="mdi mdi-phone font-size-15 align-middle pe-2 text-primary"></i>{{ contact.phoneNumber }}</p>
+                        <p class="text-muted mb-0 mt-2"><i class="mdi mdi-email font-size-15 align-middle pe-2 text-primary"></i> <a href="mailto:{{ contact.email }}">{{ contact.email }}</a></p>
+                        {% if contact.address is not null %}
+                            <p class="text-muted mb-0 mt-2"><i class="mdi mdi-google-maps font-size-15 align-middle pe-2 text-primary"></i>
+                                {{ contact.address }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+<!-- Modal -->
+<div id="deleteModal" class="modal">
+    <div class="modal-content">
+        <p>{{ 'WANT_TO_DELETE_CONTACT'|trans }}</p>
+        <div class="buttons">
+            <button id="confirmDelete">{{ 'YES'|trans }}</button>
+            <button id="cancelDelete">{{ 'NO'|trans }}</button>
+        </div>
+    </div>
+</div>
+{% endblock %}

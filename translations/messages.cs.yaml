@@ -1,0 +1,43 @@
+PAGE_LANG: 'cs'
+AVATAR: 'Avatar'
+AVATAR_IMAGES:
+  AVATAR_1:
+    NAME: 'Avatar 1'
+  AVATAR_2:
+    NAME: 'Avatar 2'
+  AVATAR_3:
+    NAME: 'Avatar 3'
+  AVATAR_4:
+    NAME: 'Avatar 4'
+  AVATAR_5:
+    NAME: 'Avatar 5'
+  AVATAR_6:
+    NAME: 'Avatar 6'
+FIRST_NAME: 'Jméno'
+LAST_NAME: 'Příjmení'
+PHONE_NUMBER: 'Telefonní číslo'
+PHONE_NUMBER_TYPE: 'Typ telefonního čísla'
+EMAIL: 'E-mail'
+SAVE_CONTACT: 'Uložit kontakt'
+UPDATE_CONTACT: 'Editovat kontakt'
+POSITION: 'Pozice'
+ADDRESS: 'Adresa'
+ADD_CONTACT: 'Přidat kontakt'
+CONTACTS_LIST: 'Seznam kontaktů'
+WANT_TO_DELETE_CONTACT: 'Opravdu chcete smazat tento kontakt?'
+CONTACT_NOT_FOUND: 'Kontakt nebyl nalezen.'
+CONTACT_CREATED_SUCCESS: 'Kontakt byl úspěšně vytvořen.'
+CONTACT_CREATION_FAILED: 'Vytvoření kontaktu se nezdařilo.'
+CONTACT_ACTUALIZED_SUCCESS: 'Kontakt byl úspěšně aktualizován.'
+CONTACT_ACTUALIZATION_FAILED: 'Aktualizace kontaktu se nezdařila.'
+CONTACT_DELETED_SUCCESS: 'Kontakt byl úspěšně smazán.'
+CONTACT_DELETION_FAILED: 'Smazání kontaktu se nezdařilo.'
+YES: 'Ano'
+NO: 'Ne'
+CONTACT_NOT_CREATED: 'Kontakt nebyl vytvořen.'
+EDIT: 'Upravit'
+DELETE: 'Smazat'
+SHOWING_CONTACTS: 'Zobrazuji %firstItem% do %lastItem% z %contactsCount% zaznamu'
+PAGE_TITLE:
+  MAIN: 'Phonebook Application - list and manage your contacts easily'
+  CREATE_UPDATE: 'Phonebook Application - create or update your contacts'
