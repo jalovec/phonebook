@@ -13,6 +13,7 @@ use App\Entity\Contact;
 class ContactService
 {
     public const DEFAULT_CONTACT_LIST = 10;
+
     public function __construct(
         private readonly ContactRepository $contactRepository,
     ) {
@@ -68,6 +69,20 @@ class ContactService
     }
 
     /**
+     * @throws ContactException
+     */
+    public function deleteContact(int $id): void
+    {
+        $contact = $this->contactRepository->doFind($id);
+        $this->contactRepository->remove($contact, true);
+    }
+
+    public function contactsCount(): int
+    {
+        return $this->contactRepository->count();
+    }
+
+    /**
      * @throws \Exception
      */
     private function fillContact(Contact $contact, ContactCompleteDto|ContactCreateDto $contactData): void
@@ -88,19 +103,5 @@ class ContactService
         }
 
         $this->contactRepository->save($contact, true);
-    }
-
-    /**
-     * @throws ContactException
-     */
-    public function deleteContact(int $id): void
-    {
-        $contact = $this->contactRepository->doFind($id);
-        $this->contactRepository->remove($contact, true);
-    }
-
-    public function contactsCount(): int
-    {
-        return $this->contactRepository->count();
     }
 }
