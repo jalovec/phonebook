@@ -16,10 +16,11 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class PhonebookController extends AbstractController
 {
+    private const  DEFAULT_CONTACT_LIST = 10;
+
     public function __construct(
-        private readonly ContactService      $contactService,
+        private readonly ContactService $contactService,
         private readonly TranslatorInterface $translator,
-        private int $defaultContactsLimit = 8,
     ) {
     }
 
@@ -28,10 +29,10 @@ class PhonebookController extends AbstractController
         Request $request,
     ): Response {
         $page = $request->query->getInt('page', 1);
-        $limit = $this->defaultContactsLimit;
+        $limit = self::DEFAULT_CONTACT_LIST;
         $contacts = $this->contactService->getPaginatedContacts($page, $limit);
         $contactsCount = $this->contactService->contactsCount();
-        $totalPages = (int) ceil($contactsCount / $limit);
+        $totalPages = (int) max(ceil($contactsCount / $limit), 1);
 
         return $this->render(
             'content/content.html.twig',
