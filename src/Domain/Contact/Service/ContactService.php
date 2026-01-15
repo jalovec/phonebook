@@ -12,6 +12,7 @@ use App\Entity\Contact;
 
 class ContactService
 {
+    public const DEFAULT_CONTACT_LIST = 10;
     public function __construct(
         private readonly ContactRepository $contactRepository,
     ) {
