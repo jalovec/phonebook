@@ -24,7 +24,7 @@ class ContactUpdateTypeForm extends AbstractType
             ->add('avatar', EnumType::class, [
                 'class' => AvatarType::class,
                 'choice_label' => fn (AvatarType $avatar) => $avatar->label(),
-                'expanded' => true,   // radio buttons
+                'expanded' => true,
                 'multiple' => false,
                 'required' => true,
             ])
@@ -59,12 +59,9 @@ class ContactUpdateTypeForm extends AbstractType
                 'required' => true,
             ])
             ->add('phoneNumberType', ChoiceType::class, [
-                'choices' => [
-                    'Mobil' => PhoneNumberType::MOBILE,
-                    'Domácí' => PhoneNumberType::HOME,
-                    'Pracovní' => PhoneNumberType::WORK,
-                    'Jiné' => PhoneNumberType::OTHER,
-                ],
+                'choices' => PhoneNumberType::cases(),
+                'choice_label' => fn(PhoneNumberType $choice) => $choice->label(),
+                'choice_value' => fn(?PhoneNumberType $choice) => $choice?->value,
                 'expanded' => false,
                 'multiple' => false,
                 'translation_domain' => 'messages',

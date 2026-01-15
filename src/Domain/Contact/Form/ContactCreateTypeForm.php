@@ -27,7 +27,7 @@ class ContactCreateTypeForm extends AbstractType
                 'translation_domain' => 'messages',
                 'choice_label' => fn (AvatarType $avatar) => $avatar->label(),
                 'choice_translation_domain' => 'messages',
-                'expanded' => true,   // radio buttons
+                'expanded' => true,
                 'multiple' => false,
                 'required' => true,
                 'data' => AvatarType::AVATAR_1,
@@ -63,27 +63,13 @@ class ContactCreateTypeForm extends AbstractType
                 'required' => true,
             ])
             ->add('phoneNumberType', ChoiceType::class, [
-                'choices' => [
-                    'Mobil' => PhoneNumberType::MOBILE,
-                    'Domácí' => PhoneNumberType::HOME,
-                    'Pracovní' => PhoneNumberType::WORK,
-                    'Jiné' => PhoneNumberType::OTHER,
-                ],
-                'expanded' => false, // select box
+                'choices' => PhoneNumberType::cases(),
+                'choice_label' => fn(PhoneNumberType $choice) => $choice->label(),
+                'choice_value' => fn(?PhoneNumberType $choice) => $choice?->value,
+                'expanded' => false,
                 'multiple' => false,
-                'label' => 'Typ čísla',
-                'choice_label' => function (PhoneNumberType $choice) {
-                    // můžeme vrátit hezký string pro select
-                    return match ($choice) {
-                        PhoneNumberType::MOBILE => 'Mobil',
-                        PhoneNumberType::HOME => 'Domácí',
-                        PhoneNumberType::WORK => 'Pracovní',
-                        PhoneNumberType::OTHER => 'Jiné',
-                    };
-                },
-                'choice_value' => function (?PhoneNumberType $choice) {
-                    return $choice?->value;
-                },
+                'translation_domain' => 'messages',
+                'label' => 'PHONE_NUMBER_TYPE',
             ])
             ->add('submit', SubmitType::class, [
                 'translation_domain' => 'messages',

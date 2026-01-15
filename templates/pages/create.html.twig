@@ -80,12 +80,12 @@
     </div>
 
     <div class="mb-3">
-        {{ form_label(createForm.phoneNumber, 'Telefon', {'label_attr': {'class': 'form-label'}}) }}
+        {{ form_label(createForm.phoneNumber) }}
         {{ form_widget(createForm.phoneNumber, {'attr': {'class': 'form-control'}}) }}
     </div>
 
     <div class="mb-3">
-        {{ form_label(createForm.phoneNumberType, 'Typ čísla', {'label_attr': {'class': 'form-label'}}) }}
+        {{ form_label(createForm.phoneNumberType) }}
         {{ form_widget(createForm.phoneNumberType, {'attr': {'class': 'form-select'}}) }}
     </div>
 
