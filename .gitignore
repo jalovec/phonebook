@@ -1,0 +1,13 @@
+# IDE
+.idea/
+
+# Cache
+.php-cs-fixer.cache
+
+# Symfony
+/var/
+/vendor/
+
+# Assets build
+/public/assets/
+/assets/styles/
