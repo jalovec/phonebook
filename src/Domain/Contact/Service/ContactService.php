@@ -12,7 +12,7 @@ use App\Entity\Contact;
 
 class ContactService
 {
-    public const DEFAULT_CONTACT_LIST = 10;
+    public const DEFAULT_CONTACT_LIST = 8;
 
     public function __construct(
         private readonly ContactRepository $contactRepository,
@@ -31,17 +31,7 @@ class ContactService
     /**
      * @return ContactCompleteDto[]
      */
-    public function getAllContacts(): array
-    {
-        $contacts = $this->contactRepository->findAll();
-
-        return array_map(fn ($c) => ContactCompleteDto::createFromEntity($c), $contacts);
-    }
-
-    /**
-     * @return ContactCompleteDto[]
-     */
-    public function getPaginatedContacts(int $page = 1, int $limit = 10): array
+    public function getPaginatedContacts(int $page, int $limit): array
     {
         $contacts = $this->contactRepository->findPaginated($page, $limit);
 
