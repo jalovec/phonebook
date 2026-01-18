@@ -64,7 +64,7 @@ class ContactRepository extends ServiceEntityRepository
     /**
      * @return Contact[]
      */
-    public function findPaginated(int $page = 1, int $limit = 10): array
+    public function findPaginated(int $page, int $limit): array
     {
         return $this->createQueryBuilder('c')
             ->orderBy('c.lastName', 'ASC')
